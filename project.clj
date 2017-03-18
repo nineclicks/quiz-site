@@ -13,6 +13,7 @@
                  [ring.middleware.logger "0.5.0"]
                  [compojure "1.5.0"]
                  [environ "1.0.3"]
+                 [ring/ring-json "0.4.0"]
                  [org.omcljs/om "1.0.0-alpha36"]]
 
   :plugins [[lein-cljsbuild "1.1.3"]
