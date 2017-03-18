@@ -11,6 +11,17 @@
 
 (m/auth-anon root)
 
+(defn generate-code
+  []
+  (reduce
+    str
+    (take
+      16
+      (repeatedly
+        #(rand-nth
+           (seq
+             (char-array "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")))))))
+
 (defn get-quiz
   [& {:keys[quiz-id] :as args}]
   (log/debug "get-quiz")
