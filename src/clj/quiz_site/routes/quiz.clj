@@ -7,6 +7,10 @@
             [matchbox.core :as m]
             [compojure.core :refer :all]))
 
+(def root (m/connect "https://quiz-site-fdc3a.firebaseio.com"))
+
+(m/auth-anon root)
+
 (defn get-quiz
   [& {:keys[quiz-id] :as args}]
   (log/debug "get-quiz")
