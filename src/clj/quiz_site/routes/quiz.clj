@@ -82,8 +82,7 @@
 (defn create-quiz
   [& {:keys[params headers] :as args}]
   (log/debug "create-quiz")
-  (push-quiz params (:host headers))
-  )
+  (push-quiz params (:host (keywordize-keys headers))))
 
 (defn submit-answers
   [& {:keys[params] :as args}]
