@@ -59,15 +59,13 @@
     }
 
     $.ajax({
-      url: "api/quiz",
+      url: "/api/quiz",
       method: "POST",
       data: quiz
-    }, function(data) {
+    }).done(function(data) {
       console.log(data);
-    }, function(err) {
-      console.log(err);
+      alert("QUIZ URL " + data["quiz-url"] + " RESULTS URL " + data.["result-url"]);
     });
-
   }
 
   function appendNewChoiceContainer() {
@@ -102,8 +100,8 @@
       a3      : 'Maybe',
       a4      : '69'
     };
-    for (var i = 0; i < 3; i++)
-      $('#quizzes').append(template(context));
+    // for (var i = 0; i < 3; i++)
+    //   $('#quizzes').append(template(context));
 
   });
 
