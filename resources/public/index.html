@@ -3,10 +3,117 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Custom Styles -->
     <link href="css/style.css" rel="stylesheet" type="text/css">
   </head>
   <body>
-    <div id="app"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="title">Project SuperHealth Man || For Your Health, Team Hercules</h1>
+          <div class="card">
+            <div class="card-block">
+              <label for="quiz_name">Name</label>
+              <input type="text" name="quiz_name" value="" class="form-control">
+              <label for="quiz_video">Video Link</label>
+              <input type="text" name="quiz_video" value="" class="form-control">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-block">
+              <h2>Question / Answers Wizard</h2>
+              <!-- QUESTION CONTAINER-->
+              <div class="quiz-question-container">
+                <label for="quiz_question_label">Question Label</label>
+                <input type="text" name="quiz_question_label" value="" placeholder="Which bear is best?" class="form-control">
+
+                <!-- ANSWER/CHOICE CONTAINER-->
+                <div class="quiz-question-answer-container">
+                  <label for="quiz_question_answer_label">Add Question Choice</label>
+                  <div class="row">
+                    <div class="col-md-9">
+                      <input type="text" name="quiz_question_answer_label" value="" placeholder="False. Black Bear" class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                      <label for="">Correct Answer?</label>
+                      <input type="checkbox" name="" value="">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-9"></div>
+                    <!-- Append New Choice Option-->
+                    <div class="col-md-3">
+                      <label for="">New Choice</label>
+                      <button type="button" name="button" class="btn btn-primary" id="addNewChoiceBtn">+</button>
+                    </div>
+                    <!--  End Append New Choice Option-->
+                  </div>
+                </div>
+                <!--  END ANSWER/CHOICE CONTAINER-->
+                <div class="row">
+                  <div class="col-md-12">
+                    <label for="">Add New Question</label>
+                    <button type="button" name="button" class="btn btn-primary" id="addNewQuestionBtn">+</button>
+                  </div>
+                </div>
+              </div>
+              <!--  END QUESTION CONTAINER-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="submit-quiz">
+            <button type="button" name="button" class="btn btn-primary" id="submit-quiz">Submit Quiz</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quizzes -->
+    <div class="container" id="quizzes">
+
+    </div>
+
+    <!-- Handlebars Template -->
+    <script id="test-quiz" type="text/x-handlebars-template">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title"><b>{{ num }}</b> {{ question }}</h3>
+            </div>
+            <div class="panel-body">
+              <input type="checkbox" name="" value="" /> <b>A.</b> {{ a1 }}
+              <br />
+              <input type="checkbox" name="" value="" /> <b>B.</b> {{ a2 }}
+              <br />
+              <input type="checkbox" name="" value="" /> <b>C.</b> {{ a3 }}
+              <br />
+              <input type="checkbox" name="" value="" /> <b>D.</b> {{ a4 }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.js" type="text/javascript"></script>
     <script src="js/compiled/quiz_site.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/app.js">
+    </script>
   </body>
 </html>
