@@ -55,22 +55,29 @@
 (defn create-quiz
   [& {:keys[params headers] :as args}]
   (log/debug "create-quiz")
-  (log/debug "params " params)
   (push-quiz params (:host headers))
   )
 
 (defn submit-answers
-  [& {:keys[quiz-id] :as args}]
+  [& {:keys[params] :as args}]
   (log/debug "submit-answers")
   (log/debug "args:   " args)
-  {:error "Implementation for this method not found."})
-
+  (let [quiz (do-get-quiz* (:quiz-id params))
+        qs   (:questions quiz)
+        qkeys (keys qs)
+        results (keywordize-keys params)
+        answers (:answers results)
+        cmpfn (fn [x] (if (= (:c (x qs)) (x answers)) true false))
+        ncorrect (count (filter cmpfn qkeys))
+        ]
+    {:correct ncorrect
+     :outof (:nQuestions quiz)}))
 (def quiz-routes
   (defroutes document-routes
     (context "/quiz" []
              (POST "/" {:keys [headers params] :as request} (wrap-status (mapply create-quiz request)))
              (context "/:quiz-id" [quiz-id]
                       (GET  "/" {params :params} (wrap-status (mapply get-quiz       params)))
-                      (POST "/" {params :params} (wrap-status (mapply submit-answers params)))))
+                      (POST "/" {:keys [headers params] :as request} (wrap-status (mapply submit-answers request)))))
     (context "/results/:results-id" [results-id]
              (GET "/" {params :params} (wrap-status (mapply get-quiz-results params))))))
