@@ -19,7 +19,7 @@
   {:error "Implementation for this method not found."})
 
 (defn create-quiz
-  [& {:keys[quiz-id] :as args}]
+  [& {:keys[quiz] :as args}]
   (log/debug "create-quiz")
   (log/debug "args:   " args)
   {:error "Implementation for this method not found."})

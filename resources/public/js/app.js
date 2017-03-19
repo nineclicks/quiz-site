@@ -58,7 +58,15 @@
       };
     }
 
-    
+    $.ajax({
+      url: "api/quiz",
+      method: "POST",
+      data: quiz
+    }, function(data) {
+      console.log(data);
+    }, function(err) {
+      console.log(err);
+    });
 
   }
 
