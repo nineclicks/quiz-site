@@ -22,6 +22,16 @@
            (seq
              (char-array "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")))))))
 
+(defn push-quiz
+  [quiz host]
+  (let [quiz-id (generate-code)
+        result-id (generate-code)]
+    (m/reset-in! root [:quizzes (keyword quiz-id)] (merge quiz {:result-id result-id}))
+    (m/reset-in! root [:results (keyword result-id)] {:quiz-id quiz-id})
+    {:quiz-url (str host "/quiz/" quiz-id)
+     :result-url (str host "/quiz/" result-id)}
+    ))
+
 (defn get-quiz
   [& {:keys[quiz-id] :as args}]
   (log/debug "get-quiz")
@@ -35,10 +45,11 @@
   {:error "Implementation for this method not found."})
 
 (defn create-quiz
-  [& {:keys[quiz-id] :as args}]
+  [& {:keys[params headers] :as args}]
   (log/debug "create-quiz")
-  (log/debug "args:   " args)
-  {:error "Implementation for this method not found."})
+  (log/debug "params " params)
+  (push-quiz params (:host headers))
+  )
 
 (defn submit-answers
   [& {:keys[quiz-id] :as args}]
@@ -49,7 +60,7 @@
 (def quiz-routes
   (defroutes document-routes
     (context "/quiz" []
-             (POST "/" {params :params} (wrap-status (mapply create-quiz params)))
+             (POST "/" {:keys [headers params] :as request} (wrap-status (mapply create-quiz request)))
              (context "/:quiz-id" [quiz-id]
                       (GET  "/" {params :params} (wrap-status (mapply get-quiz       params)))
                       (POST "/" {params :params} (wrap-status (mapply submit-answers params)))))
