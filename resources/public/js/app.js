@@ -75,7 +75,6 @@
   }
 
   function appendNewQuestionContainer() {
-    var currentNumberOfQuestions = $('quiz_question_label').length;
     $.ajax({
       url: 'templates/question.hbs',
       method: 'GET',
@@ -83,9 +82,7 @@
     }).done(function(data) {
         var source = $(data).html();
         var template = Handlebars.compile(source);
-        var context = {
-          question_label: "Question #" + currentNumberOfQuestions + " Label"
-        };
+        var context = {};
         $("#addQuestionContainer").prepend(template(context));
 
     }, function(error) {
