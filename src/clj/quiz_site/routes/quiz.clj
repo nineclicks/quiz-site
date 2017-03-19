@@ -30,6 +30,11 @@
   (json/read-str (:body (client/get (str fburl "/quizzes/" quiz-id ".json")))
                  :key-fn keyword))
 
+(defn do-get-results*
+  [result-id]
+  (json/read-str (:body (client/get (str fburl "/results/" result-id ".json")))
+                 :key-fn keyword))
+
 (defn do-put-results*
   [result-id results]
   (client/post (str fburl "/results/" result-id "/subs.json") {:form-params results
@@ -52,10 +57,21 @@
     quiz))
 
 (defn get-quiz-results
-  [& {:keys[quiz-id] :as args}]
+  [& {:keys[result-id] :as args}]
   (log/debug "get-quiz")
   (log/debug "args:   " args)
-  {:error "Implementation for this method not found."})
+  (let [results (do-get-results* result-id)
+        subs (vals (:subs results))
+        quiz-id (:quiz-id results)
+        quiz (do-get-quiz* quiz-id)
+        nQ (:nQuestions quiz)
+        video (:video quiz)
+        name (:name quiz)]
+    {:nQuestions nQ
+     :video video
+     :name name
+     :results (map (fn [x] (assoc x :score (quot (* 100 (:correct x)) nQ)))subs)}
+  ))
 
 (defn create-quiz
   [& {:keys[params headers] :as args}]
@@ -91,5 +107,5 @@
              (context "/:quiz-id" [quiz-id]
                       (GET  "/" {params :params} (wrap-status (mapply get-quiz       params)))
                       (POST "/" {:keys [headers params] :as request} (wrap-status (mapply submit-answers request)))))
-    (context "/results/:results-id" [results-id]
+    (context "/results/:result-id" [result-id]
              (GET "/" {params :params} (wrap-status (mapply get-quiz-results params))))))
