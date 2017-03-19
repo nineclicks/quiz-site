@@ -78,4 +78,21 @@
 
   }
 
+  $(document).ready(function() {
+    // Handlebars Template
+    var source   = $('#test-quiz').html();
+    var template = Handlebars.compile(source);
+    var context  = {
+      num     : '1.',
+      question: 'This is a test?',
+      a1      : 'No',
+      a2      : 'Yes',
+      a3      : 'Maybe',
+      a4      : '69'
+    };
+    for (var i = 0; i < 3; i++)
+      $('#quizzes').append(template(context));
+
+  });
+
 })(window);

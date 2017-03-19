@@ -32,6 +32,14 @@ body {
   margin: 0 1em;
 }
 
+.panel-default {
+  margin: 1em;
+}
+
+.panel-heading {
+  background-color: #efede3;
+}
+
 button.btn-primary {
   background: #0099b6;
   background-image: -webkit-gradient(linear,0 0,0 90%,from(#0099b6),to(#076d88));
