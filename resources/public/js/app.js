@@ -75,7 +75,22 @@
   }
 
   function appendNewQuestionContainer() {
+    var currentNumberOfQuestions = $('quiz_question_label').length;
+    $.ajax({
+      url: 'templates/question.hbs',
+      method: 'GET',
+      cache: true
+    }).done(function(data) {
+        var source = $(data).html();
+        var template = Handlebars.compile(source);
+        var context = {
+          question_label: "Question #" + currentNumberOfQuestions + " Label"
+        };
+        $("#addQuestionContainer").prepend(template(context));
 
+    }, function(error) {
+      console.log(error);
+    })
   }
 
   $(document).ready(function() {
