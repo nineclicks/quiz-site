@@ -10,7 +10,7 @@
             [compojure.core :refer :all]))
 
 (def fburl "https://quiz-site-fdc3a.firebaseio.com")
-(def root (m/connect "https://quiz-site-fdc3a.firebaseio.com"))
+(def root (m/connect fburl))
 
 (m/auth-anon root)
 
