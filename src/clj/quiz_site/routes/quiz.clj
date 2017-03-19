@@ -30,6 +30,11 @@
   (json/read-str (:body (client/get (str fburl "/quizzes/" quiz-id ".json")))
                  :key-fn keyword))
 
+(defn do-put-results*
+  [result-id results]
+  (client/post (str fburl "/results/" result-id "/subs.json") {:form-params results
+                                                               :content-type :json}))
+
 (defn push-quiz
   [quiz host]
   (let [quiz-id (generate-code)
@@ -69,9 +74,16 @@
         answers (:answers results)
         cmpfn (fn [x] (if (= (:c (x qs)) (x answers)) true false))
         ncorrect (count (filter cmpfn qkeys))
+        sid (:sid results)
+        rid (:result-id quiz)
+        submission {:sid sid
+                    :correct ncorrect
+                    :time (new java.util.Date)}
         ]
+    (do-put-results* rid submission)
     {:correct ncorrect
-     :outof (:nQuestions quiz)}))
+     :outof (:nQuestions quiz)
+     :sid sid}))
 (def quiz-routes
   (defroutes document-routes
     (context "/quiz" []
