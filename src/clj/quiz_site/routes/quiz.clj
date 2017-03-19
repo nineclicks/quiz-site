@@ -47,14 +47,20 @@
     (m/reset-in! root [:quizzes (keyword quiz-id)] (merge quiz {:result-id result-id}))
     (m/reset-in! root [:results (keyword result-id)] {:quiz-id quiz-id})
     {:quiz-url (str host "/quiz/" quiz-id)
-     :result-url (str host "/quiz/" result-id)}))
+     :result-url (str host "/result/" result-id)}))
 
 (defn get-quiz
   [& {:keys[quiz-id] :as args}]
   (log/debug "get-quiz")
   (log/debug "args:   " args)
-  (let [quiz (do-get-quiz* quiz-id)]
-    quiz))
+  (let [quiz (do-get-quiz* quiz-id)
+        qs   (:questions quiz)
+        qs2  (reduce-kv
+               (fn [m k v]
+                 (assoc m k (dissoc v :c)))
+               {}
+               qs)]
+    (assoc (dissoc quiz :questions :result-id) :questions qs2)))
 
 (defn get-quiz-results
   [& {:keys[result-id] :as args}]
@@ -100,6 +106,7 @@
     {:correct ncorrect
      :outof (:nQuestions quiz)
      :sid sid}))
+
 (def quiz-routes
   (defroutes document-routes
     (context "/quiz" []
