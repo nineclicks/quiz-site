@@ -60,22 +60,13 @@
     }
 
     $.ajax({
-      url: "./api/quiz/Zpx1DblLfTKlFyTw",
-      method: "GET"
+      url: "/api/quiz",
+      method: "POST",
+      data: quiz
     }).done(function(data) {
-        buildQuizzes(data);
-
-
-        // console.log(data);
-        // $('#new-quiz').prepend(
-        //   'Quiz url: '   + data['quiz-url']+'<br>',
-        //   'Result url: ' + data['result-url']
-        // );
-        console.log(data);
-
-    }, function(error) {
-      console.log(error);
+      window.alert('Quiz Url ' + data["quiz-url"] + " Results URL " + data["results-url"]);
     });
+
 
   }
 
@@ -125,21 +116,20 @@
       console.log(error);
     });
   }
+  
+  $(document).ready(function() {
+    // Handlebars Template
+    var source   = $('#test-quiz').html();
+    var template = Handlebars.compile(source);
+    var context  = {
+      num     : '1.',
+      question: 'This is a test?',
+      a1      : 'No',
+      a2      : 'Yes',
+      a3      : 'Maybe',
+      a4      : '69'
+    };
 
-  // $(document).ready(function() {
-  //   var source   = $('#test-quiz').html();
-  //   var template = Handlebars.compile(source);
-  //   var context  = {
-  //     num     : '1.',
-  //     question: 'This is a test?',
-  //     a1      : 'No',
-  //     a2      : 'Yes',
-  //     a3      : 'Maybe',
-  //     a4      : '69'
-  //   };
-  //   for (var i = 0; i < 3; i++)
-  //     $('#new-quiz').append(template(context));
-  //
-  // });
+  });
 
 })(window);

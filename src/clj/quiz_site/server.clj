@@ -1,5 +1,6 @@
 (ns quiz-site.server
   (:require [clojure.java.io :as io]
+            [clojure.string :as string]
             [compojure.core :refer [context ANY GET PUT POST DELETE defroutes]]
             [compojure.route :refer [resources]]
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
@@ -17,6 +18,9 @@
     {:status 200
      :headers {"Content-Type" "text/html; charset=utf-8"}
      :body (io/input-stream (io/resource "public/index.html"))})
+  (GET "/quiz/:quiz-id" [quiz-id] {:status 200
+                                   :headers {"Content-Type" "text/html; charset=utf-8"}
+                                   :body (string/replace (slurp (io/resource "public/takequiz.html")) ":quiz-id:" quiz-id)})
   (context "/api" []
            (-> (defroutes document-routes
                  quiz-site.routes.quiz/quiz-routes)
