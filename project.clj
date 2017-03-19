@@ -14,6 +14,9 @@
                  [compojure "1.5.0"]
                  [environ "1.0.3"]
                  [ring/ring-json "0.4.0"]
+                 [matchbox "0.0.9"]
+                 [clj-http "2.3.0"]
+                 [org.clojure/data.json "0.2.6"]
                  [org.omcljs/om "1.0.0-alpha36"]]
 
   :plugins [[lein-cljsbuild "1.1.3"]
