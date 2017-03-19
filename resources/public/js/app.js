@@ -75,7 +75,19 @@
   }
 
   function appendNewQuestionContainer() {
+    $.ajax({
+      url: 'templates/question.hbs',
+      method: 'GET',
+      cache: true
+    }).done(function(data) {
+        var source = $(data).html();
+        var template = Handlebars.compile(source);
+        var context = {};
+        $("#addQuestionContainer").prepend(template(context));
 
+    }, function(error) {
+      console.log(error);
+    })
   }
 
   $(document).ready(function() {

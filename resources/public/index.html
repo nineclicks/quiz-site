@@ -29,22 +29,56 @@
             <div class="card-block">
               <h2>Question / Answers Wizard</h2>
               <!-- QUESTION CONTAINER-->
-              <div class="quiz-question-container">
+              <div class="quiz-question-container" id="quiz_questions">
                 <label for="quiz_question_label">Question Label</label>
                 <input type="text" name="quiz_question_label" value="" placeholder="Which bear is best?" class="form-control">
-
                 <!-- ANSWER/CHOICE CONTAINER-->
                 <div class="quiz-question-answer-container">
                   <label for="quiz_question_answer_label">Add Question Choice</label>
+                  <!-- A -->
                   <div class="row">
                     <div class="col-md-9">
-                      <input type="text" name="quiz_question_answer_label" value="" placeholder="False. Black Bear" class="form-control">
+                      <input type="text" name="quiz_question_answer_label" value="" placeholder="A. False. Black Bear" class="form-control">
                     </div>
                     <div class="col-md-3">
                       <label for="">Correct Answer?</label>
                       <input type="checkbox" name="" value="">
                     </div>
                   </div>
+
+                  <!-- B -->
+                  <div class="row">
+                    <div class="col-md-9">
+                      <input type="text" name="quiz_question_answer_label" value="" placeholder="B. False. Black Bear" class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                      <label for="">Correct Answer?</label>
+                      <input type="checkbox" name="" value="">
+                    </div>
+                  </div>
+
+                  <!--C -->
+                  <div class="row">
+                    <div class="col-md-9">
+                      <input type="text" name="quiz_question_answer_label" value="" placeholder="C. False. Black Bear" class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                      <label for="">Correct Answer?</label>
+                      <input type="checkbox" name="" value="">
+                    </div>
+                  </div>
+
+                  <!--D -->
+                  <div class="row">
+                    <div class="col-md-9">
+                      <input type="text" name="quiz_question_answer_label" value="" placeholder="D. False. Black Bear" class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                      <label for="">Correct Answer?</label>
+                      <input type="checkbox" name="" value="">
+                    </div>
+                  </div>
+
                   <div class="row">
                     <div class="col-md-9"></div>
                     <!-- Append New Choice Option-->
@@ -56,10 +90,12 @@
                   </div>
                 </div>
                 <!--  END ANSWER/CHOICE CONTAINER-->
-                <div class="row">
-                  <div class="col-md-12">
-                    <label for="">Add New Question</label>
-                    <button type="button" name="button" class="btn btn-primary" id="addNewQuestionBtn">+</button>
+                <div id="addQuestionContainer">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label for="">Add New Question</label>
+                      <button type="button" name="button" class="btn btn-primary" id="addNewQuestionBtn">+</button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -109,8 +145,9 @@
 
     <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.runtime.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.js" type="text/javascript"></script>
     <script src="js/compiled/quiz_site.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/app.js">
