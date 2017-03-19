@@ -63,9 +63,10 @@
       method: "POST",
       data: quiz
     }).done(function(data) {
-      console.log(data);
-      alert("QUIZ URL " + data["quiz-url"] + " RESULTS URL " + data.["result-url"]);
+      window.alert('Quiz Url ' + data["quiz-url"] + " Results URL " + data["results-url"]);
     });
+
+
   }
 
   function appendNewChoiceContainer() {
