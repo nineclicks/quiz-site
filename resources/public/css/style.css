@@ -28,6 +28,10 @@ body {
   margin: 1em;
 }
 
+.card-block {
+  padding: 2em;
+}
+
 .submit-quiz {
   margin: 0 1em;
 }

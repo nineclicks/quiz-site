@@ -45,28 +45,64 @@
 
   function submitQuiz() {
     var quiz = {};
-    quiz.name = $("input[name=quiz_name]")[0].value;
-    quiz.video = $("input[name=quiz_video]")[0].value;
+    quiz.name       = $("input[name=quiz_name]")[0].value;
+    quiz.video      = $("input[name=quiz_video]")[0].value;
     quiz.nQuestions = $('quiz-question-container').length;
-    quiz.questions = {};
+    quiz.questions  = {};
+
     for (var i = 1; i <= quiz.nQuestions; i++) {
       quiz.questions["q"+i] =  {
         "label" : "What the Heck",
-        "a1": "Answer1",
-        "a2": "Answer2",
-        "c" : "a1"
+        "a1"    : "Answer1",
+        "a2"    : "Answer2",
+        "c"     : "a1"
       };
     }
 
     $.ajax({
-      url: "api/quiz",
-      method: "POST",
-      data: quiz
-    }, function(data) {
-      console.log(data);
-    }, function(err) {
-      console.log(err);
+      url: "./api/quiz/Zpx1DblLfTKlFyTw",
+      method: "GET"
+    }).done(function(data) {
+        buildQuizzes(data);
+
+
+        // console.log(data);
+        // $('#new-quiz').prepend(
+        //   'Quiz url: '   + data['quiz-url']+'<br>',
+        //   'Result url: ' + data['result-url']
+        // );
+        console.log(data);
+
+    }, function(error) {
+      console.log(error);
     });
+
+  }
+
+  function buildQuizzes(quiz) {
+    var context;
+    var source   = $('#test-quiz').html();
+    var template = Handlebars.compile(source);
+
+    context  = {
+      question : quiz.questions.q1.q,
+      a1       : quiz.questions.q1.a.a1,
+      a2       : quiz.questions.q1.a.a2,
+      a3       : quiz.questions.q1.a.a3,
+      a4       : quiz.questions.q1.a.a4,
+    };
+    $('#new-quiz').prepend(template(context));
+
+    context  = {
+      quizName : quiz.name,
+      question : quiz.questions.q2.q,
+      a1       : quiz.questions.q2.a.a1,
+      a2       : quiz.questions.q2.a.a2,
+      a3       : quiz.questions.q2.a.a3,
+      a4       : quiz.questions.q2.a.a4,
+    };
+    $('#new-quiz').prepend(template(context));
+
 
   }
 
@@ -87,24 +123,23 @@
 
     }, function(error) {
       console.log(error);
-    })
+    });
   }
 
-  $(document).ready(function() {
-    // Handlebars Template
-    var source   = $('#test-quiz').html();
-    var template = Handlebars.compile(source);
-    var context  = {
-      num     : '1.',
-      question: 'This is a test?',
-      a1      : 'No',
-      a2      : 'Yes',
-      a3      : 'Maybe',
-      a4      : '69'
-    };
-    for (var i = 0; i < 3; i++)
-      $('#quizzes').append(template(context));
-
-  });
+  // $(document).ready(function() {
+  //   var source   = $('#test-quiz').html();
+  //   var template = Handlebars.compile(source);
+  //   var context  = {
+  //     num     : '1.',
+  //     question: 'This is a test?',
+  //     a1      : 'No',
+  //     a2      : 'Yes',
+  //     a3      : 'Maybe',
+  //     a4      : '69'
+  //   };
+  //   for (var i = 0; i < 3; i++)
+  //     $('#new-quiz').append(template(context));
+  //
+  // });
 
 })(window);
